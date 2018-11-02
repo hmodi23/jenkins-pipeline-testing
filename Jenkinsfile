@@ -1,10 +1,10 @@
 pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('build') {
-            steps {
-                sh 'uname -a'
-            }
+    agent {   
+        def customImage = docker.build("nginx:latest")
+
+        customImage.inside {
+            sh 'make test'
         }
     }
+    
 }
