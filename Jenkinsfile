@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'ubuntu --version'
+                sh 'uname -a'
             }
         }
     }
