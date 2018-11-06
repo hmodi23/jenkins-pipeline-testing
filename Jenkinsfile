@@ -4,10 +4,11 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                def customImage = docker.build("ubuntu:latest")
-
-                customImage.inside {
+                script{
+                    def customImage = docker.build("ubuntu:latest")
+                    customImage.inside {
                     sh 'make test'
+                    }
                 }
             }
         }
