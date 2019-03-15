@@ -1,20 +1,4 @@
 /*pipeline {
-    agent { dockerfile true }
-        
-    stages {
-        stage('build') {
-            steps {
-                script{
-                    def customImage = docker.build("ubuntu:latest")
-                    customImage.inside {
-                    sh 'make test'
-                    }
-                }
-            }
-        }
-    }
-}
-pipeline {
     agent {
         docker {
             image 'maven:3-alpine'
@@ -30,14 +14,24 @@ pipeline {
     }
 }*/
 pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
-    }
+  // Assign to docker slave(s) label, could also be 'any'
+  agent {
+    label 'docker' 
+  }
+
     stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
+    stage('Docker maven test') {
+      agent {
+        docker {
+          // Set both label and image
+          label 'docker'
+          image 'maven:3-alpine'
         }
+      }
+      steps {
+        // Steps run in maven:3-alpine docker container on docker slave
+        sh 'mvn --version'
+      }
     }
-}
+  }
+} 
