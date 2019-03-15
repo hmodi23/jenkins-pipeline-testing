@@ -14,24 +14,15 @@
     }
 }*/
 pipeline {
-  // Assign to docker slave(s) label, could also be 'any'
-  agent {
-    label 'docker' 
-  }
-
-    stages {
-    stage('Docker maven test') {
-      agent {
-        docker {
-          // Set both label and image
-          label 'docker'
-          image 'maven:3-alpine'
-        }
-      }
-      steps {
-        // Steps run in maven:3-alpine docker container on docker slave
-        sh 'mvn --version'
-      }
+    agent {
+        dockerfile true
     }
-  }
-} 
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Hello World!'
+                sh 'echo myVar = $myVar'
+            }
+        }
+    }
+}
