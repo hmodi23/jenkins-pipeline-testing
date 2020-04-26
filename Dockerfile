@@ -1,3 +1,7 @@
-FROM ubuntu:latest
+#FROM ubuntu:latest
 
-ENV myVar="helllooo"
+#ENV myVar="helllooo"
+
+FROM node:7-alpine
+
+RUN apk add -U subversion
