@@ -28,25 +28,9 @@ node('master') {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'heli-docker-hub-credentials') {
+        docker.withRegistry('https://registry.hub.docker.com', 'hmodi-docker-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
     }
 }
-
-
-
-/*pipeline {
-    agent {
-        dockerfile true
-    }
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Hello World!'
-                sh 'echo myVar = $myVar'
-            }
-        }
-    }
-}*/
