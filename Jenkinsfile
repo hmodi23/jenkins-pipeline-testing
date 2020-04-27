@@ -11,7 +11,7 @@ node('master') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("hmodi/hellonode")
+        app = docker.build("hmodi1623/hellonode")
     }
 
     stage('Test image') {
