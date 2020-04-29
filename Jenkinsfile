@@ -21,7 +21,7 @@ node('master') {
         app.inside {
             sh 'echo "Tests passed"'
         }
-        hytrustPlugin name: app
+        hytrustPlugin name: app.toString()
     }
 
     stage('Push image') {
